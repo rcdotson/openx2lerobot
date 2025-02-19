@@ -21,6 +21,7 @@ Dataset Structure of `meta/info.json`:
   "codebase_version": "v2.0", // lastest lerobot format
   "robot_type": "franka", // specific robot type, unknown if not provided
   "fps": 3, // control frequency, 10 if not provided
+  // will add an additional key "control_frequency"
   "features": {
     "observation.images.image_key": {
       "dtype": "video",
@@ -50,7 +51,7 @@ Dataset Structure of `meta/info.json`:
       "shape": [7],
       "names": {
         "motors": ["x", "y", "z", "roll", "pitch", "yaw", "gripper"] 
-        // unified 8-dim vector: [xyz, action type, gripper], motor_x if not provided
+        // unified 7-dim vector: [xyz, action type, gripper], motor_x if not provided
       }
     }
   }
@@ -81,7 +82,7 @@ pip install -e .
 
 ## Get started
 
-Downloadd source code:
+Download source code:
 
 ```bash
 git clone https://github.com/Tavish9/openx2lerobot.git
