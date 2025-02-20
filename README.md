@@ -82,6 +82,18 @@ pip install -e .
 
 ## Get started
 
+> [!IMPORTANT]  
+> Before running the following code, modify `consolidate()` function in lerobot.
+> ```python
+> def consolidate(self, run_compute_stats: bool = True, keep_image_files: bool = False, stat_kwargs: dict = {}) -> None:
+>     ...
+>     if run_compute_stats:
+>         self.stop_image_writer()
+>         # TODO(aliberts): refactor stats in save_episodes
+>         self.meta.stats = compute_stats(self, **stat_kwargs)
+>     ...
+> ```
+
 Download source code:
 
 ```bash
