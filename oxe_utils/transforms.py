@@ -127,6 +127,7 @@ def bridge_orig_dataset_transform(trajectory: Dict[str, Any]) -> Dict[str, Any]:
 
     Note =>> In original Bridge V2 dataset, the first timestep has an all-zero action, so we remove it!
     """
+
     for key in trajectory.keys():
         if key == "traj_metadata":
             continue
@@ -311,6 +312,9 @@ def viola_dataset_transform(trajectory: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def berkeley_autolab_ur5_dataset_transform(trajectory: Dict[str, Any]) -> Dict[str, Any]:
+    # flip wrist_image from bgr to rgb
+    trajectory["observation"]["hand_image"] = trajectory["observation"]["hand_image"][..., ::-1]
+
     trajectory["observation"]["state"] = trajectory["observation"]["robot_state"][:, 6:14]
     trajectory["observation"]["depth"] = trajectory["observation"].pop("image_with_depth")
 
@@ -400,6 +404,10 @@ def nyu_rot_dataset_transform(trajectory: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def stanford_hydra_dataset_transform(trajectory: Dict[str, Any]) -> Dict[str, Any]:
+    # flip image & wrist_image from bgr to rgb
+    trajectory["observation"]["image"] = trajectory["observation"]["image"][..., ::-1]
+    trajectory["observation"]["wrist_image"] = trajectory["observation"]["wrist_image"][..., ::-1]
+
     # invert gripper action, +1 = open, 0 = close
     trajectory["action"] = tf.concat(
         (
@@ -718,6 +726,10 @@ def uiuc_d3field_dataset_transform(trajectory: Dict[str, Any]) -> Dict[str, Any]
 
 
 def utaustin_mutex_dataset_transform(trajectory: Dict[str, Any]) -> Dict[str, Any]:
+    # flip image & wrist_image from bgr to rgb
+    trajectory["observation"]["image"] = trajectory["observation"]["image"][..., ::-1]
+    trajectory["observation"]["wrist_image"] = trajectory["observation"]["wrist_image"][..., ::-1]
+
     trajectory["observation"]["state"] = trajectory["observation"]["state"][:, :8]
 
     # invert gripper action + clip, +1 = open, 0 = close
@@ -736,6 +748,10 @@ def utaustin_mutex_dataset_transform(trajectory: Dict[str, Any]) -> Dict[str, An
 
 
 def berkeley_fanuc_dataset_transform(trajectory: Dict[str, Any]) -> Dict[str, Any]:
+    # flip image & wrist_image from bgr to rgb
+    trajectory["observation"]["image"] = trajectory["observation"]["image"][..., ::-1]
+    trajectory["observation"]["wrist_image"] = trajectory["observation"]["wrist_image"][..., ::-1]
+
     trajectory["observation"]["joint_state"] = trajectory["observation"]["state"][:, :6]
     trajectory["observation"]["gripper_state"] = trajectory["observation"]["state"][:, 6:7]
 
