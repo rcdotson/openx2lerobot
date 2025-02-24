@@ -105,6 +105,13 @@ pip install -e .
 > ffmpeg_args["-vf"] = vf
 > ```
 
+> [!TIP]
+> We recommend using `libsvtav1` as the vcodec for ffmpeg when encoding videos during dataset conversion.
+
+Compile FFmpeg with libsvtav1 encoder (Optional):
+
+`libsvtav1` is only supported in higher version of ffmpeg, so many users need to compile ffmpeg to enable it. You can follow this [link](https://trac.ffmpeg.org/wiki/CompilationGuide) for detailed compilation instructions..
+
 Download source code:
 
 ```bash
