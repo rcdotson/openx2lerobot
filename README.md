@@ -2,8 +2,11 @@
     <p>LeRobot: State-of-the-art AI for real-world robotics</p>
 </h1>
 
-> [!NOTE]  
+> [!NOTE]
 > This repository supports converting datasets from OpenX format to LeRobot V2.0 dataset format.
+
+> [!WARNING]
+> `2025.02.25`: LeRobot has updated the dataset from v2.0 to v2.1, scripts need to be updated accordingly.
 
 ## 🚀 What's New in This Script
 
