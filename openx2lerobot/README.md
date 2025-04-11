@@ -96,10 +96,10 @@ Dataset Structure of `meta/info.json`:
 1. Download source code:
 
     ```bash
-    git clone https://github.com/Tavish9/openx2lerobot.git
+    git clone https://github.com/Tavish9/any4lerobot.git
     ```
 
-2. Modify path in `convert.sh`:
+2. Modify path in `openx2lerobot/convert.sh`:
 
     ```bash
     python openx_rlds.py \
@@ -113,7 +113,7 @@ Dataset Structure of `meta/info.json`:
 3. Execute the script:
 
     ```bash
-    bash convert.sh
+    cd openx2lerobot && bash convert.sh
     ```
 
 ## Available OpenX_LeRobot Dataset
