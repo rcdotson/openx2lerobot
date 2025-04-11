@@ -19,7 +19,6 @@ Transforms adopt the following structure:
 from typing import Any, Dict
 
 import tensorflow as tf
-
 from oxe_utils.transform_utils import (
     binarize_gripper_actions,
     invert_gripper_actions,
@@ -32,6 +31,7 @@ def droid_baseact_transform(trajectory: Dict[str, Any]) -> Dict[str, Any]:
     """
     DROID dataset transformation for actions expressed in *base* frame of the robot.
     """
+
     def rand_swap_exterior_images(img1, img2):
         """
         Randomly swaps the two exterior images (for training with single exterior input).
@@ -56,11 +56,11 @@ def droid_baseact_transform(trajectory: Dict[str, Any]) -> Dict[str, Any]:
         )
     )
     # trajectory["observation"]["proprio"] = tf.concat(
-        # (
-            # trajectory["observation"]["cartesian_position"],
-            # trajectory["observation"]["gripper_position"],
-        # ),
-        # axis=-1,
+    # (
+    # trajectory["observation"]["cartesian_position"],
+    # trajectory["observation"]["gripper_position"],
+    # ),
+    # axis=-1,
     # )
     trajectory["observation"]["EEF_state"] = trajectory["observation"]["cartesian_position"]
     trajectory["observation"]["gripper_state"] = trajectory["observation"]["gripper_position"]

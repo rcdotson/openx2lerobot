@@ -76,6 +76,7 @@ class StateEncoding(IntEnum):
 class ActionEncoding(IntEnum):
     # fmt: off
     EEF_POS = 1             # EEF Delta XYZ (3) + Roll-Pitch-Yaw (3) + Gripper Open/Close (1)
+    EEF_POS_QUAT = 5        # EEF Delta XYZ (3) + Quaternion (4) + Gripper Open/Close (1)
     JOINT_POS = 2           # Joint Delta Position (7) + Gripper Open/Close (1)
     JOINT_POS_BIMANUAL = 3  # Joint Delta Position (2 x [ Joint Delta Position (6) + Gripper Open/Close (1) ])
     EEF_R6 = 4              # EEF Delta XYZ (3) + R6 (6) + Gripper Open/Close (1)

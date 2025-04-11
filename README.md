@@ -1,146 +1,60 @@
 <h1 align="center">
-    <p>LeRobot: State-of-the-art AI for real-world robotics</p>
+    <p>Any4LeRobot: A tool collection for LeRobot</p>
 </h1>
 
-> [!NOTE]
-> This repository supports converting datasets from OpenX format to LeRobot V2.0 dataset format.
-> 
-> Current script is now compatible with LeRobot V2.1.
+<div align="center">
 
-## 🚀 What's New in This Script
+[![Python versions](https://img.shields.io/pypi/pyversions/lerobot)](https://www.python.org/downloads/)
+[![LeRobot Dataset](https://img.shields.io/badge/LeRobot%20Dataset-v2.1-ff69b4.svg)](https://github.com/huggingface/lerobot/pull/711)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-In this dataset, we have made several key improvements:
+</div>
 
-- **OXE Standard Transformations** 🔄: We have integrated OXE's standard transformations to ensure uniformity across data.
-- **Alignment of State and Action Information** 🤖: State and action information are now perfectly aligned, enhancing the clarity and coherence of the dataset.
-- **Robot Type and Control Frequency** 📊: Annotations have been added for robot type and control frequency to improve dataset comprehensibility.
-- **Joint Information** 🦾: Joint-specific details have been included to assist with fine-grained understanding.
+> [!IMPORTANT]
+>
+> **Star and Contribute**, let's make community of robotics better and better! 🔥
 
-Dataset Structure of `meta/info.json`:
+A curated collection of utilities for [LeRobot Projects](https://github.com/huggingface/lerobot), including data conversion scripts, preprocessing tools, training workflow helpers and etc..
 
-```json
-{
-  "codebase_version": "v2.1", // lastest lerobot format
-  "robot_type": "franka", // specific robot type, unknown if not provided
-  "fps": 3, // control frequency, 10 if not provided
-  // will add an additional key "control_frequency"
-  "features": {
-    "observation.images.image_key": {
-      "dtype": "video",
-      "shape": [128, 128, 3],
-      "names": ["height", "width", "rgb"], // bgr to rgb if needed
-      "info": {
-        "video.fps": 3.0,
-        "video.height": 128,
-        "video.width": 128,
-        "video.channels": 3,
-        "video.codec": "av1",
-        "video.pix_fmt": "yuv420p",
-        "video.is_depth_map": false,
-        "has_audio": false
-      }
-    },
-    "observation.state": {
-      "dtype": "float32",
-      "shape": [8],
-      "names": {
-        "motors": ["x", "y", "z", "roll", "pitch", "yaw", "pad", "gripper"] 
-        // unified 8-dim vector: [xyz, state type, gripper], motor_x if not provided
-      }
-    },
-    "action": {
-      "dtype": "float32",
-      "shape": [7],
-      "names": {
-        "motors": ["x", "y", "z", "roll", "pitch", "yaw", "gripper"] 
-        // unified 7-dim vector: [xyz, action type, gripper], motor_x if not provided
-      }
-    }
-  }
-}
-```
 
-## Installation
+## 🚀 What's New <a><img width="35" height="20" src="https://user-images.githubusercontent.com/12782558/212848161-5e783dd6-11e8-4fe0-bbba-39ffb77730be.png"></a>
 
-Download lerobot code:
+- **\[2025.04.11\]** We Change the repo from `openx2lerobot` to `any4lerobot`, making a ​​universal toolbox for LeRobot​​! 🔥🔥🔥
+- **\[2025.02.19\]** We have supported Data Conversion from Open X-Embodiment to LeRobot! 🔥🔥🔥
 
-```bash
-git clone https://github.com/huggingface/lerobot.git
-cd lerobot
-```
 
-Create a virtual environment with Python 3.10 and activate it, e.g. with [`miniconda`](https://docs.anaconda.com/free/miniconda/index.html):
+## ✨ Features
+- ​**​Data Conversion​**​:
+    - [x] [Open X-Embodiment to LeRobot](./openx2lerobot/README.md)
+    - [ ] AgiBot-World to LeRobot
+    - [ ] LeRobot to Open X-Embodiment
 
-```bash
-conda create -y -n lerobot python=3.10
-conda activate lerobot
-```
+- ​**Version Conversion​**​:
+    - [ ] LeRobotv2.0 to LeRobotv2.1
+    - [ ] LeRobotv2.1 to LeRobotv2.0
 
-Install 🤗 LeRobot:
+## 📂 Public Resources
+- Available datasets in LeRobot format:
+    - [Open X-Embodiment Dataset](https://huggingface.co/IPEC-COMMUNITY)
+    - [Open X-Embodiment Visualizer](https://huggingface.co/spaces/IPEC-COMMUNITY/openx_dataset_lerobot_v2.0)
 
-```bash
-pip install -e .
-```
 
-## Get started
+## 👷‍♂️ Contributing
+We appreciate all contributions to improving Any4LeRobot. Please refer to the contributing guideline for the best practice.
 
-> [!IMPORTANT]  
-> 1.Before running the following code, modify `save_episode()` function in lerobot.
-> ```python
-> def save_episode(self, episode_data: dict | None = None, keep_images: bool | None = False) -> None:
->     ...
->     # delete images
->     if not keep_images:
->         img_dir = self.root / "images"
->         if img_dir.is_dir():
->             shutil.rmtree(self.root / "images")
->     ...
-> ```
-> 2.for `bc_z` dataset, modify `encode_video_frames()` in `lerobot/common/datasets/video_utils.py`.
-> 
-> ```python
-> # add the following content to line 141:
-> vf: str = "pad=ceil(iw/2)*2:ceil(ih/2)*2",
-> # Add the following content to line 171:
-> ffmpeg_args["-vf"] = vf
-> ```
+<a href="https://github.com/Tavish9/any4lerobot/graphs/contributors" target="_blank">
+  <table>
+    <tr>
+      <th colspan="2">
+        <br><img src="https://contrib.rocks/image?repo=tavish9/any4lerobot"><br><br>
+      </th>
+    </tr>
+  </table>
+</a>
 
-> [!TIP]
-> We recommend using `libsvtav1` as the vcodec for ffmpeg when encoding videos during dataset conversion.
 
-Compile FFmpeg with libsvtav1 encoder (Optional):
+## 🤝 Acknowledgements
 
-`libsvtav1` is only supported in higher version of ffmpeg, so many users need to compile ffmpeg to enable it. You can follow this [link](https://trac.ffmpeg.org/wiki/CompilationGuide) for detailed compilation instructions..
+Special thanks to the [LeRobot teams](https://github.com/huggingface/lerobot) for making this great framework.
 
-Download source code:
-
-```bash
-git clone https://github.com/Tavish9/openx2lerobot.git
-```
-
-Modify path in `convert.sh`:
-
-```bash
-python openx_rlds.py \
-    --raw-dir /path/to/droid/1.0.0 \
-    --local-dir /path/to/LEROBOT_DATASET \
-    --repo-id your_hf_id \
-    --use-videos \
-    --push-to-hub
-```
-
-Execute the script:
-
-```bash
-bash convert.sh
-```
-
-## Available OpenX_LeRobot Dataset
-
-We have upload most of the OpenX datasets in [huggingface](https://huggingface.co/IPEC-COMMUNITY)🤗.
-
-You can visualize the dataset in this [space](https://huggingface.co/spaces/IPEC-COMMUNITY/openx_dataset_lerobot_v2.0).
-
-## Acknowledgment
-
-Special thanks to the [Lerobot teams](https://github.com/huggingface/lerobot) for making this great framework.
+<p align="right"><a href="#top">🔝Back to top</a></p>
