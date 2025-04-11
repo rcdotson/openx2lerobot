@@ -1,0 +1,11 @@
+name: "🙋 Question"
+description: General questions about the work
+labels: ["question"]
+body:
+  - type: textarea
+    id: question
+    validations:
+      required: true
+    attributes:
+      label: Question
+      placeholder: Start question here...
