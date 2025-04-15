@@ -20,7 +20,9 @@ A curated collection of utilities for [LeRobot Projects](https://github.com/hugg
 
 ## 🚀 What's New <a><img width="35" height="20" src="https://user-images.githubusercontent.com/12782558/212848161-5e783dd6-11e8-4fe0-bbba-39ffb77730be.png"></a>
 
-- **\[2025.04.11\]** We Change the repo from `openx2lerobot` to `any4lerobot`, making a ​​universal toolbox for LeRobot​​! 🔥🔥🔥
+ 
+- **\[2025.04.15\]** We add Dataset Merging Tool for merging multi-source lerobot datasets! 🔥🔥🔥
+- **\[2025.04.11\]** We change the repo from `openx2lerobot` to `any4lerobot`, making a ​​universal toolbox for LeRobot​​! 🔥🔥🔥
 - **\[2025.02.19\]** We have supported Data Conversion from Open X-Embodiment to LeRobot! 🔥🔥🔥
 
 
@@ -34,6 +36,10 @@ A curated collection of utilities for [LeRobot Projects](https://github.com/hugg
 - ​**Version Conversion​**​:
     - [ ] LeRobotv2.0 to LeRobotv2.1
     - [ ] LeRobotv2.1 to LeRobotv2.0
+
+- **Other Utils**:
+    - [x] [Dataset Merging](./utils/dataset_merging/README.md)
+
 
 ## 📂 Public Resources
 - Available datasets in LeRobot format:
