@@ -17,9 +17,7 @@
 
 A curated collection of utilities for [LeRobot Projects](https://github.com/huggingface/lerobot), including data conversion scripts, preprocessing tools, training workflow helpers and etc..
 
-
 ## 🚀 What's New <a><img width="35" height="20" src="https://user-images.githubusercontent.com/12782558/212848161-5e783dd6-11e8-4fe0-bbba-39ffb77730be.png"></a>
-
 
 - **\[2025.04.20\]** We add Dataset Version Converter for LeRobotv2.0 to LeRobotv2.1! 🔥🔥🔥
 - **\[2025.04.15\]** We add Dataset Merging Tool for merging multi-source lerobot datasets! 🔥🔥🔥
@@ -27,29 +25,36 @@ A curated collection of utilities for [LeRobot Projects](https://github.com/hugg
 - **\[2025.04.11\]** We change the repo from `openx2lerobot` to `any4lerobot`, making a ​​universal toolbox for LeRobot​​! 🔥🔥🔥
 - **\[2025.02.19\]** We have supported Data Conversion from Open X-Embodiment to LeRobot! 🔥🔥🔥
 
-
 ## ✨ Features
+
 - ​**​Data Conversion​**​:
-    - [x] [Open X-Embodiment to LeRobot](./openx2lerobot/README.md)
-    - [x] [AgiBot-World to LeRobot](./agibot2lerobot/README.md)
-    - [ ] RoboMIND to LeRobot
-    - [ ] LeRobot to RLDS
+
+  - [x] [Open X-Embodiment to LeRobot](./openx2lerobot/README.md)
+  - [x] [AgiBot-World to LeRobot](./agibot2lerobot/README.md)
+  - [ ] RoboMIND to LeRobot
+  - [ ] LeRobot to RLDS
 
 - ​**Version Conversion​**​:
-    - [x] [LeRobotv2.0 to LeRobotv2.1](./utils/version_convert/README.md)
-    - [ ] LeRobotv2.1 to LeRobotv2.0
+  - [x] [LeRobotv2.0 to LeRobotv2.1](./utils/version_convert/README.md)
+  - [ ] LeRobotv2.1 to LeRobotv2.0
 
 - **Other Utils**:
-    - [x] [Dataset Merging](./utils/dataset_merging/README.md)
+  - [x] [Dataset Merging](./utils/dataset_merging/README.md)
 
+## 📚 Awesome works supporting LeRobot
+
+- [SpatialVLA](https://github.com/SpatialVLA/SpatialVLA): a spatial-enhanced vision-language-action model that is trained on 1.1 Million real robot episodes ![GitHub Repo stars](https://img.shields.io/github/stars/SpatialVLA/SpatialVLA)
+- [openpi](https://github.com/Physical-Intelligence/openpi): the official implemenation of $π_0$: A Vision-Language-Action Flow Model for General Robot Control ![GitHub Repo stars](https://img.shields.io/github/stars/Physical-Intelligence/openpi)
+- [Isaac-GR00T](https://github.com/NVIDIA/Isaac-GR00T): NVIDIA Isaac GR00T N1 is the world's first open foundation model for generalized humanoid robot reasoning and skills ![GitHub Repo stars](https://img.shields.io/github/stars/NVIDIA/Isaac-GR00T)
 
 ## 📂 Public Resources
-- Available datasets in LeRobot format:
-    - [Open X-Embodiment Dataset](https://huggingface.co/IPEC-COMMUNITY)
-    - [Open X-Embodiment Visualizer](https://huggingface.co/spaces/IPEC-COMMUNITY/openx_dataset_lerobot_v2.0)
 
+- Available datasets in LeRobot format:
+  - [Open X-Embodiment Dataset](https://huggingface.co/IPEC-COMMUNITY)
+  - [Open X-Embodiment Visualizer](https://huggingface.co/spaces/IPEC-COMMUNITY/openx_dataset_lerobot_v2.0)
 
 ## 👷‍♂️ Contributing
+
 We appreciate all contributions to improving Any4LeRobot. Please refer to the contributing guideline for the best practice.
 
 <a href="https://github.com/Tavish9/any4lerobot/graphs/contributors" target="_blank">
@@ -61,7 +66,6 @@ We appreciate all contributions to improving Any4LeRobot. Please refer to the co
     </tr>
   </table>
 </a>
-
 
 ## 🤝 Acknowledgements
 
