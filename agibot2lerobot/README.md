@@ -1,5 +1,29 @@
 # AgiBot-World to LeRobot
 
+AgiBot World, the first large-scale robotic learning dataset designed to advance multi-purpose robotic policies. It is accompanied by foundation models, benchmarks, and an ecosystem to democratize access to high-quality robot data for the academic community and the industry, paving the path towards the "ImageNet Moment" for Embodied AI. (Copied from [docs](https://agibot-world.com/))
+
+## ⚠️ Dirty Tasks
+
+| (Gripper) Task ID | (Some episodes) Reason | Fixed By |
+| :---------------: | :--------------------: | -------- |
+|     task_352      | action_len > state_len | skipping |
+|     task_354      | action_len > state_len | skipping |
+|     task_359      | action_len > state_len | skipping |
+|     task_361      | action_len > state_len | skipping |
+|     task_368      | action_len > state_len | skipping |
+|     task_376      | action_len > state_len | skipping |
+|     task_377      | action_len > state_len | skipping |
+|     task_380      |     corrupted mp4      | skipping |
+|     task_384      |     corrupted mp4      | skipping |
+|     task_410      | action_len > state_len | skipping |
+|     task_414      | action_len > state_len | skipping |
+|     task_421      | action_len > state_len | skipping |
+|     task_428      |     corrupted mp4      | skipping |
+|     task_460      |     corrupted mp4      | skipping |
+|     task_505      |     corrupted mp4      | skipping |
+|     task_510      |     corrupted mp4      | skipping |
+|     task_711      |     corrupted mp4      | skipping |
+
 ## 🚀 What's New in This Script
 
 In this dataset, we have made several key improvements:
@@ -128,7 +152,6 @@ Dataset Structure of `meta/info.json`:
 > The conversion speed of this script is limited by the performance of the physical machine running it, including **CPU cores and memory**. We recommend using **3 CPU cores per task** for optimal performance. However, each task requires approximately 20 GiB of memory. To avoid running out of memory, you may need to increase the number of CPU cores per task depending on your system’s available memory.
 
 ### Download source code:
-
 
 ```bash
 git clone https://github.com/Tavish9/any4lerobot.git

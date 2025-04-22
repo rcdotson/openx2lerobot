@@ -234,7 +234,7 @@ def save_as_lerobot_dataset(agibot_world_config, task: tuple[Path, Path], num_th
     task_info = get_task_info(json_file)
     task_name = task_info[0]["task_name"]
     task_init_scene = task_info[0]["init_scene_text"]
-    task_instruction = f"{task_name}.{task_init_scene}"
+    task_instruction = f"{task_name} | {task_init_scene}"
     task_id = json_file.stem.split("_")[-1]
     task_info = {episode["episode_id"]: episode for episode in task_info}
 
@@ -263,26 +263,28 @@ def save_as_lerobot_dataset(agibot_world_config, task: tuple[Path, Path], num_th
             if eid not in task_info:
                 print(f"{json_file.stem}, episode_{eid} not in task_info.json, skipping...")
                 continue
-            try:
-                action_config = task_info[eid]["label_info"]["action_config"]
-                raw_dataset = load_local_dataset(
-                    eid,
-                    src_path=src_path,
-                    task_id=task_id,
-                    task_instruction=task_instruction,
-                    save_depth=save_depth,
-                    AgiBotWorld_CONFIG=agibot_world_config,
-                )
-                _, frames, videos = raw_dataset
-                if not all([video_path.exists() for video_path in videos.values()]):
-                    print(f"{json_file.stem}, episode_{eid}: some of the videos does not exist, skipping...")
-                    continue
+            action_config = task_info[eid]["label_info"]["action_config"]
+            raw_dataset = load_local_dataset(
+                eid,
+                src_path=src_path,
+                task_id=task_id,
+                task_instruction=task_instruction,
+                save_depth=save_depth,
+                AgiBotWorld_CONFIG=agibot_world_config,
+            )
+            _, frames, videos = raw_dataset
+            if not all([video_path.exists() for video_path in videos.values()]):
+                print(f"{json_file.stem}, episode_{eid}: some of the videos does not exist, skipping...")
+                continue
 
-                for frame_data in frames:
-                    dataset.add_frame(frame_data)
+            for frame_data in frames:
+                dataset.add_frame(frame_data)
+            try:
                 dataset.save_episode(videos=videos, action_config=action_config)
             except Exception as e:
-                raise Exception(f"{json_file.stem}, {eid}") from e
+                print(f"{json_file.stem}, episode_{eid}: there are some corrupted mp4s\nException details: {str(e)}")
+                dataset.episode_buffer = None
+                continue
             gc.collect()
             print(f"process done for {json_file.stem}, episode_id {eid}, len {len(frames)}")
     else:
@@ -306,11 +308,22 @@ def save_as_lerobot_dataset(agibot_world_config, task: tuple[Path, Path], num_th
 
             for raw_dataset in as_completed(futures):
                 eid, frames, videos = raw_dataset.result()
+                if not all([video_path.exists() for video_path in videos.values()]):
+                    print(f"{json_file.stem}, episode_{eid}: some of the videos does not exist, skipping...")
+                    continue
                 action_config = task_info[eid]["label_info"]["action_config"]
                 for frame_data in frames:
                     dataset.add_frame(frame_data)
-                dataset.save_episode(videos=videos, action_config=action_config)
+                try:
+                    dataset.save_episode(videos=videos, action_config=action_config)
+                except Exception as e:
+                    print(
+                        f"{json_file.stem}, episode_{eid}: there are some corrupted mp4s\nException details: {str(e)}"
+                    )
+                    dataset.episode_buffer = None
+                    continue
                 gc.collect()
+                print(f"process done for {json_file.stem}, episode_id {eid}, len {len(frames)}")
 
 
 def main(
