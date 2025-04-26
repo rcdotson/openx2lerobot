@@ -826,6 +826,12 @@ def gnm_dataset_transform(trajectory: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def fmb_dataset_transform(trajectory: Dict[str, Any]) -> Dict[str, Any]:
+    # flip image from bgr to rgb
+    trajectory["observation"]["image_wrist_1"] = trajectory["observation"]["image_wrist_1"][..., ::-1]
+    trajectory["observation"]["image_wrist_2"] = trajectory["observation"]["image_wrist_2"][..., ::-1]
+    trajectory["observation"]["image_side_1"] = trajectory["observation"]["image_side_1"][..., ::-1]
+    trajectory["observation"]["image_side_2"] = trajectory["observation"]["image_side_2"][..., ::-1]
+    
     # every input feature is batched, ie has leading batch dimension
     trajectory["observation"]["proprio"] = tf.concat(
         (
