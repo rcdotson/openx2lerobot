@@ -4,6 +4,7 @@
 
 <div align="center">
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Tavish9/any4lerobot)
 [![Python versions](https://img.shields.io/pypi/pyversions/lerobot)](https://www.python.org/downloads/)
 [![LeRobot Dataset](https://img.shields.io/badge/dynamic/json?url=https://api.github.com/repos/tavish9/any4lerobot/commits?per_page=1&query=$[0].commit.committer.date&label=LeRobot&color=blue)](https://github.com/huggingface/lerobot)
 [![LeRobot Dataset](https://img.shields.io/badge/LeRobot%20Dataset-v2.1-ff69b4.svg)](https://github.com/huggingface/lerobot/pull/711)
