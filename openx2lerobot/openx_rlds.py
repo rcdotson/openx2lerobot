@@ -58,6 +58,9 @@ def transform_raw_dataset(episode, dataset_name):
     else:
         state_obs_keys = [None for _ in range(8)]
 
+    #state_obs_keys = ["joint", "gripper", "zeros"]
+    state_obs_keys = ["state"]
+    
     proprio = tf.concat(
         [
             (
@@ -70,15 +73,34 @@ def transform_raw_dataset(episode, dataset_name):
         axis=1,
     )
 
+    #action_keys = ["action_joint", "action_gripper", "action_terminate"]
+    action_keys = ["action"]
+    #print(traj["action_dxyz"])
+    #print(traj["action_deuler"])
+    action = tf.concat(
+        [
+            (
+                #tf.cast(traj[key] * (180.0/np.pi if key == "action_joint" else 1.0), tf.float32)
+                tf.cast(traj[key], tf.float32)
+            )
+            for key in action_keys
+        ],
+        axis=1,
+    )
+
     traj.update(
         {
             "proprio": proprio,
             "task": traj.pop("language_instruction"),
-            "action": tf.cast(traj["action"], tf.float32),
+            "action": action  #tf.cast(traj["action"], tf.float32),
         }
     )
 
     episode["steps"] = traj
+    print("Episode")
+    print(action)
+    print(proprio)
+    print(episode)
     return episode
 
 
@@ -108,6 +130,11 @@ def generate_features_from_raw(builder: tfds.core.DatasetBuilder, use_videos: bo
             action_names = ["x", "y", "z", "roll", "pitch", "yaw", "gripper"]
         elif action_encoding == ActionEncoding.JOINT_POS:
             action_names = [f"motor_{i}" for i in range(7)] + ["gripper"]
+
+    state_names = ["x", "y", "z", "roll", "pitch", "yaw", "gripper", "pad"]
+    #state_names = ["zeros"]
+    action_names = ["x", "y", "z", "roll", "pitch", "yaw", "gripper", "terminate"]
+
 
     DEFAULT_FEATURES = {
         "observation.state": {
@@ -152,7 +179,7 @@ def save_as_lerobot_dataset(lerobot_dataset: LeRobotDataset, raw_dataset: tf.dat
                     "task": traj["task"][0].decode(),
                 }
             )
-        lerobot_dataset.save_episode(keep_images=kwargs.get("keep_images", False))
+        lerobot_dataset.save_episode() #keep_images=kwargs.get("keep_images", False))
 
 
 def create_lerobot_dataset(
@@ -185,6 +212,7 @@ def create_lerobot_dataset(
 
     builder = tfds.builder(dataset_name, data_dir=data_dir, version=version)
     features = generate_features_from_raw(builder, use_videos)
+    print (features)
     filter_fn = lambda e: e["success"] if dataset_name == "kuka" else True
     raw_dataset = (
         builder.as_dataset(split="train")
